@@ -1,80 +1,112 @@
+// components/ContactForm.js
 import { useState } from "react";
+import { MessageCircle } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    message: ""
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      console.log("Form submitted:", formData);
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setIsSubmitting(false);
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => setSubmitStatus(null), 3000);
+    }, 1000);
+  };
 
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setError("Please fill all fields!");
-      return;
-    }
-
-    // Reset error
-    setError("");
-
-    // Here you can handle form submission (send to email API or backend)
-    console.log("Form Submitted:", formData);
-
-    setSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
-
-    // Hide success after 3 seconds
-    setTimeout(() => setSubmitted(false), 3000);
+  const openWhatsApp = () => {
+    const phoneNumber = "254702167229";
+    const message = "Hello! I'm interested in your services.";
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
-    <div className="max-w-md mx-auto">
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        {error && <p className="text-red-500 font-semibold">{error}</p>}
-        {submitted && <p className="text-green-400 font-semibold">Message sent successfully!</p>}
+    <>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="block text-white mb-2">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition"
+            placeholder="Your name"
+          />
+        </div>
 
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          placeholder="Your Name"
-          onChange={handleChange}
-          className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+        <div>
+          <label className="block text-white mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition"
+            placeholder="michaelwallance4@gmail.com"
+          />
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          placeholder="Your Email"
-          onChange={handleChange}
-          className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+        <div>
+          <label className="block text-white mb-2">Message</label>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows="5"
+            className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition resize-none"
+            placeholder="Tell me about your project..."
+          ></textarea>
+        </div>
 
-        <textarea
-          name="message"
-          value={formData.message}
-          placeholder="Your Message"
-          rows="5"
-          onChange={handleChange}
-          className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+        {submitStatus === "success" && (
+          <div className="bg-green-900/50 border border-green-700 text-green-300 px-4 py-3 rounded-lg">
+            Message sent successfully! I'll get back to you soon.
+          </div>
+        )}
 
         <button
           type="submit"
-          className="p-3 bg-blue-400 text-black rounded font-semibold hover:bg-blue-500 transition transform hover:scale-105"
+          disabled={isSubmitting}
+          className="w-full px-6 py-3 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Send Message
+          {isSubmitting ? "Sending..." : "Send Message"}
         </button>
       </form>
-    </div>
+
+      <div className="mt-6 pt-6 border-t border-gray-700">
+        <p className="text-gray-400 text-sm text-center mb-4">Or reach out faster via</p>
+        <button
+          onClick={openWhatsApp}
+          className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition transform hover:scale-105 flex items-center justify-center gap-2"
+        >
+          <MessageCircle className="w-5 h-5" />
+          WhatsApp Chat
+        </button>
+      </div>
+    </>
   );
 }
