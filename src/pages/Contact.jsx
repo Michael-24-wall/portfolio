@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   const openWhatsApp = () => {
-    const phoneNumber = "254700000000"; // Replace with your WhatsApp number
+    const phoneNumber = "254702167229";
     const message = "Hello! I'm interested in your services.";
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
@@ -67,7 +67,7 @@ export default function Contact() {
                         href="tel:+254700000000" 
                         className="text-white hover:text-gray-300 transition-colors"
                       >
-                        +254 700 000 000
+                        +254 702167229
                       </a>
                     </div>
                   </div>
@@ -83,7 +83,7 @@ export default function Contact() {
                         onClick={openWhatsApp}
                         className="text-white hover:text-gray-300 transition-colors cursor-pointer"
                       >
-                        +254 700 000 000
+                        +254 702167229
                       </button>
                     </div>
                   </div>
@@ -172,7 +172,7 @@ export default function Contact() {
                     name="email"
                     required
                     className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition"
-                    placeholder="your@email.com"
+                    placeholder="michaelwallance4@gmail.com"
                   />
                 </div>
 
