@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="min-h-screen flex flex-col justify-center items-center bg-gray-900 px-4 py-20">
       {/* Profile Image */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
+        initial={{ opacity: 1, scale: 0.5 }}     
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         className="mb-8"

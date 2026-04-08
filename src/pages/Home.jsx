@@ -467,7 +467,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { 
-                name: "Melda Akinyi", 
+                name: "Mauro Petilo", 
                 review: "Working with Wallance was incredible! He delivered a stunning website that perfectly represents our brand. The communication was excellent throughout.", 
                 rating: 5, 
                 image: "https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop", 
@@ -479,7 +479,7 @@ export default function Home() {
                 review: "Great experience! Understood exactly what I needed. The website exceeded my expectations and launched on time. Highly professional!", 
                 rating: 5, 
                 image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop", 
-                title: "Founder, Creative Hub Ghana",
+                title: "Founder, Home Designs Ghana",
                 location: "Accra, Ghana"
               },
               { 
@@ -487,7 +487,7 @@ export default function Home() {
                 review: "Highly recommend! Attention to detail is top-notch. The team was professional and delivered quality work that exceeded our expectations.", 
                 rating: 5, 
                 image: "https://images.pexels.com/photos/3184612/pexels-photo-3184612.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop", 
-                title: "Manager, Startup SA",
+                title: "Manager, Hero class SA",
                 location: "Johannesburg, SA"
               },
             ].map((review, idx) => (
