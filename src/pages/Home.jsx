@@ -78,13 +78,28 @@ export default function Home() {
 
   return (
     <AnimatedPage>
-      {/* Hero Section */}
-      <section className="pt-32 text-center min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      {/* Hero Section - Enhanced with more text */}
+      <section className="pt-32 text-center min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+        
+        {/* Animated Background Gradients */}
+        <motion.div 
+          className="absolute inset-0 opacity-30"
+          animate={{
+            background: [
+              "radial-gradient(circle at 20% 50%, rgba(59,130,246,0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 50%, rgba(139,92,246,0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 50%, rgba(59,130,246,0.1) 0%, transparent 50%)",
+            ]
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+
         {/* Profile Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
+          className="relative z-10"
         >
           <div className="w-40 h-40 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 p-1 shadow-2xl">
             <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden">
@@ -101,49 +116,117 @@ export default function Home() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold text-white mt-6"
+          className="text-5xl md:text-7xl font-bold text-white mt-6 relative z-10"
         >
-          Hi, I'm Wallance 
+          Hi, I'm Wallance
         </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-4 text-gray-300 text-lg md:text-xl"
-        >
-          I build{" "}
-          <span className="text-blue-400 font-semibold">
-            <Typewriter
-              words={["Modern Websites", "Responsive Web Apps", "Professional Portfolios", "E-commerce Solutions"]}
-              loop={0}
-              cursor
-              cursorStyle="|"
-              typeSpeed={80}
-              deleteSpeed={50}
-              delaySpeed={1500}
-            />
-          </span>
-        </motion.p>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="mt-8 flex gap-4 flex-wrap justify-center"
+          transition={{ delay: 0.3, duration: 1 }}
+          className="relative z-10"
+        >
+          <p className="mt-4 text-gray-300 text-lg md:text-xl">
+            I build{" "}
+            <span className="text-blue-400 font-semibold">
+              <Typewriter
+                words={["Modern Websites", "Responsive Web Apps", "Professional Portfolios", "E-commerce Solutions"]}
+                loop={0}
+                cursor
+                cursorStyle="|"
+                typeSpeed={80}
+                deleteSpeed={50}
+                delaySpeed={1500}
+              />
+            </span>
+          </p>
+        </motion.div>
+
+        {/* Additional Text Lines */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="relative z-10 mt-6"
+        >
+          <p className="text-gray-400 text-base md:text-lg max-w-2xl px-4">
+            Passionate about creating digital experiences that make a difference
+          </p>
+          <p className="text-gray-500 text-sm md:text-base mt-2">
+            Specializing in full-stack development, responsive design, and user-centric solutions
+          </p>
+        </motion.div>
+
+        {/* Skills Tags */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="relative z-10 mt-8 flex flex-wrap gap-3 justify-center"
+        >
+          {["React", "Node.js", "Firebase", "Tailwind CSS", "TypeScript", "Next.js"].map((skill, idx) => (
+            <motion.span
+              key={idx}
+              whileHover={{ scale: 1.05 }}
+              className="px-4 py-2 bg-gray-800/80 backdrop-blur-sm text-blue-400 rounded-full text-sm font-medium border border-gray-700"
+            >
+              {skill}
+            </motion.span>
+          ))}
+        </motion.div>
+
+        {/* Availability Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="relative z-10 mt-8"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 rounded-full border border-green-500/30">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="text-green-400 text-sm">Available for work</span>
+          </div>
+        </motion.div>
+
+        {/* Call to Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="mt-8 flex gap-4 flex-wrap justify-center relative z-10"
         >
           <button
             onClick={goToContact}
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition transform hover:scale-105"
+            className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition transform hover:scale-105"
           >
             Contact Me
           </button>
           <button
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-6 py-3 border-2 border-blue-400 text-blue-400 rounded-full hover:bg-blue-400 hover:text-gray-900 transition transform hover:scale-105"
+            className="px-8 py-3 border-2 border-blue-400 text-blue-400 rounded-full hover:bg-blue-400 hover:text-gray-900 transition transform hover:scale-105"
           >
             View My Work
           </button>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="flex flex-col items-center gap-2"
+          >
+            <span className="text-gray-500 text-sm">Scroll to explore</span>
+            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+            </svg>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -161,10 +244,10 @@ export default function Home() {
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "10+", label: "Projects Completed", icon: "" },
-              { number: "8+", label: "Happy Clients", icon: "" },
-              { number: "2+", label: "Years Experience", icon: "" },
-              { number: "100%", label: "Client Satisfaction", icon: "" },
+              { number: "10+", label: "Projects Completed" },
+              { number: "8+", label: "Happy Clients" },
+              { number: "2+", label: "Years Experience" },
+              { number: "100%", label: "Client Satisfaction" },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -175,7 +258,6 @@ export default function Home() {
                 whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 className="text-center p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-gray-700 shadow-xl"
               >
-                <div className="text-5xl mb-3">{stat.icon}</div>
                 <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
                   {stat.number}
                 </div>
@@ -221,7 +303,6 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="text-5xl mb-4">{skill.icon}</div>
                   <h3 className="text-xl font-semibold mb-2 text-white">{skill.title}</h3>
                   <p className="text-gray-300">{skill.desc}</p>
                 </div>
