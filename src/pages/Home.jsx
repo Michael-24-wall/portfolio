@@ -33,22 +33,58 @@ export default function Home() {
     navigate("/projects");
   };
 
-  const profileImage = "https://randomuser.me/api/portraits/men/1.jpg";
-  const galleryImages = [
-    "https://picsum.photos/id/1/400/400",
-    "https://picsum.photos/id/2/400/400",
-    "https://picsum.photos/id/3/400/400",
-    "https://picsum.photos/id/4/400/400",
-    "https://picsum.photos/id/5/400/400",
-    "https://picsum.photos/id/6/400/400",
-    "https://picsum.photos/id/7/400/400",
-    "https://picsum.photos/id/8/400/400",
+  const profileImage = "images/meee.jpeg";
+  
+  // ========== PUT YOUR RECENT PROJECTS HERE ==========
+  // Just replace the image paths and links with your own!
+  
+  const recentProjects = [
+    {
+      image: "images/system.png",      
+      link: "https://shalombookings.vercel.app/",  
+      title: "Nyota App",         
+      description: "Modern web application with stunning UI"  
+    },
+    {
+      image: "images/todo.png",        
+      link: "https://react-firebase-todolist-ten.vercel.app/",  
+      title: "Ndugu Platform",           
+      description: "Responsive platform for community connection" 
+    },
+    // 👇 YOU CAN ADD MORE PROJECTS HERE (they will appear in the "What I Do" section)
+    // {
+    //   image: "images/your-image.jpg",
+    //   link: "https://your-website.com",
+    //   title: "Your Project Title",
+    //   description: "Your project description here"
+    // },
   ];
-  const projectImages = [
-    "https://picsum.photos/id/0/400/300",
-    "https://picsum.photos/id/10/400/300",
-    "https://picsum.photos/id/20/400/300",
+  
+  // Featured projects for the "What I Do" section (you can update these too)
+  const skillProjects = [
+    { 
+      icon: "", 
+      title: recentProjects[0]?.title || "Project 1", 
+      desc: recentProjects[0]?.description || "Fast, modern, and responsive web application.",
+      image: recentProjects[0]?.image || "images/nyota.png",
+      link: recentProjects[0]?.link || "#"
+    },
+    { 
+      icon: "", 
+      title: recentProjects[1]?.title || "Project 2", 
+      desc: recentProjects[1]?.description || "Beautiful and intuitive designs.",
+      image: recentProjects[1]?.image || "images/ndugu.png",
+      link: recentProjects[1]?.link || "#"
+    },
+    { 
+      icon: "", 
+      title: "Stays Booking", 
+      desc: "Seamless hotel booking experience on all devices.",
+      image: "images/stays.png",
+      link: "https://stays-five.vercel.app/"
+    },
   ];
+  // ================================================================
 
   return (
     <AnimatedPage>
@@ -77,7 +113,7 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="text-5xl font-bold text-white mt-6"
         >
-          Hi, I'm Wallance 👋
+          Hi, I'm Wallance 
         </motion.h1>
 
         <motion.p
@@ -127,10 +163,10 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12 text-white">My Achievements</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { number: "50+", label: "Projects Completed", icon: "🚀" },
-              { number: "30+", label: "Happy Clients", icon: "😊" },
-              { number: "4+", label: "Years Experience", icon: "💪" },
-              { number: "100%", label: "Client Satisfaction", icon: "⭐" },
+              { number: "7+", label: "Projects Completed", icon: "" },
+              { number: "5+", label: "Happy Clients", icon: "" },
+              { number: "2+", label: "Years Experience", icon: "" },
+              { number: "100%", label: "Client Satisfaction", icon: "" },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -154,18 +190,15 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-white">What I Do</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: "🚀", title: "Web Development", desc: "Fast, modern, and responsive websites.", image: projectImages[0] },
-              { icon: "🎨", title: "UI/UX Design", desc: "Beautiful and intuitive designs.", image: projectImages[1] },
-              { icon: "📱", title: "Mobile Responsive", desc: "Perfect on all devices.", image: projectImages[2] },
-            ].map((skill, idx) => (
+            {skillProjects.map((skill, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700"
+                className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => window.open(skill.link, '_blank')}
               >
                 <img src={skill.image} alt={skill.title} className="w-full h-48 object-cover" />
                 <div className="p-6">
@@ -179,35 +212,121 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Gallery */}
+      {/* RECENT PROJECTS SECTION - Only 2 cards with YOUR images and links */}
       <section className="py-20 bg-gray-900" id="projects">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">My Recent Projects</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryImages.map((image, idx) => (
+          <motion.h2 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold text-center mb-12 text-white"
+          >
+            My Recent Projects
+          </motion.h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {recentProjects.map((project, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.05 }}
-                viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-xl cursor-pointer"
-                onClick={() => window.open(image, '_blank')}
+                initial={{ opacity: 0, x: idx === 0 ? -100 : 100, rotateY: idx === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: idx * 0.2,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  transition: { duration: 0.3 },
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+                }}
+                className="group relative bg-gray-800 rounded-2xl overflow-hidden cursor-pointer border border-gray-700"
+                onClick={() => window.open(project.link, '_blank')}
               >
-                <img src={image} alt={`Project ${idx + 1}`} className="w-full h-48 object-cover transition-transform group-hover:scale-110" />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-yellow-400 text-sm font-semibold">View Project</span>
+                {/* Image Container with Zoom Effect */}
+                <div className="relative overflow-hidden h-64">
+                  <motion.img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/400x300?text=Image+Not+Found";
+                    }}
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
+                
+                {/* Content */}
+                <div className="p-6">
+                  <motion.h3 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.2 + 0.3 }}
+                    className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors"
+                  >
+                    {project.title}
+                  </motion.h3>
+                  
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: idx * 0.2 + 0.4 }}
+                    className="text-gray-300 mb-4"
+                  >
+                    {project.description}
+                  </motion.p>
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.2 + 0.5 }}
+                    className="flex items-center gap-2 text-yellow-400 font-semibold"
+                  >
+                    <span></span>
+                    <motion.svg 
+                      className="w-5 h-5" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        repeatDelay: 1,
+                        duration: 0.5 
+                      }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </motion.svg>
+                  </motion.div>
+                </div>
+                
+                {/* Animated Border on Hover */}
+                <motion.div 
+                  className="absolute inset-0 rounded-2xl border-2 border-yellow-400"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ pointerEvents: 'none' }}
+                />
               </motion.div>
             ))}
           </div>
+          
           <div className="text-center mt-12">
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={goToProjects}
-              className="px-8 py-3 bg-yellow-400 text-gray-900 rounded-full font-semibold text-lg hover:bg-yellow-500 transition transform hover:scale-105 inline-flex items-center gap-2 shadow-lg"
+              className="px-8 py-3 bg-yellow-400 text-gray-900 rounded-full font-semibold text-lg hover:bg-yellow-500 transition inline-flex items-center gap-2 shadow-lg"
             >
               View All Projects
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,7 +343,7 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12 text-white">What My Clients Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "John Doe", review: "Amazing job! Very professional and delivered on time!", rating: 5, image: "https://randomuser.me/api/portraits/men/11.jpg", title: "CEO, Tech Corp" },
+              { name: "Melda Akinyi", review: "Amazing job! Very professional and delivered on time!", rating: 5, image: "https://randomuser.me/api/portraits/men/11.jpg", title: "Manager, Tech Corp" },
               { name: "Jane Smith", review: "Great experience! Understood exactly what I needed.", rating: 5, image: "https://randomuser.me/api/portraits/women/12.jpg", title: "Founder, Design Co" },
               { name: "Mike Johnson", review: "Highly recommend! Attention to detail is top-notch.", rating: 5, image: "https://randomuser.me/api/portraits/men/13.jpg", title: "Manager, Startup Inc" },
             ].map((review, idx) => (
@@ -294,9 +413,15 @@ export default function Home() {
 
       {/* Back to Top Button */}
       {isVisible && (
-        <button onClick={scrollToTop} className="fixed bottom-8 right-8 bg-yellow-400 text-gray-900 p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-all hover:scale-110 z-50">
+        <motion.button 
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          onClick={scrollToTop} 
+          className="fixed bottom-8 right-8 bg-yellow-400 text-gray-900 p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-all hover:scale-110 z-50"
+        >
           ↑
-        </button>
+        </motion.button>
       )}
     </AnimatedPage>
   );

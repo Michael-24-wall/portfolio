@@ -99,7 +99,7 @@ export default function Skills() {
               <div className="text-sm text-gray-400">Average Proficiency</div>
             </div>
             <div className="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
-              <div className="text-2xl font-bold text-blue-400">4+</div>
+              <div className="text-2xl font-bold text-blue-400">2+</div>
               <div className="text-sm text-gray-400">Years Experience</div>
             </div>
             <div className="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
